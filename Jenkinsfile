@@ -2,8 +2,6 @@ pipeline {
     agent {
         label "java"
     }
-    environment {
-    }
     stages {
         stage("build Docker image") {
             steps {
