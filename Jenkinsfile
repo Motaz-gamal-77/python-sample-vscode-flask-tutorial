@@ -14,8 +14,10 @@ pipeline{
         }
         stage("Push Docker image"){
             steps{
+                withDockerRegistry([credentialsId: "${DOCKER_CREDENTIALS_ID}", url: ""]) {
                 sh "docker push ${DOCKER_CREDENTIALS_ID}/${dockerImage}:v${BUILD_NUMBER}"
             }
         }
     }
+}
 }
