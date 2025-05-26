@@ -1,2 +1,2 @@
 @Library('sharedlib')_
-call-python()
+call_python()
