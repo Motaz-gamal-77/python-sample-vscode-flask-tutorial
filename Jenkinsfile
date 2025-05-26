@@ -1,2 +1,2 @@
-@Library('libx')_
+@Library('sharedlib')_
 call-python()
