@@ -1,9 +1,35 @@
-node('java') {
-    stage('Build Docker Image') {
-        sh "docker build -t moatazgamal7/iti-day2-python:v${env.BUILD_NUMBER} ."
+@Library('libx')_
+pipeline{
+    agent {
+        label 'any'
     }
     
-    stage('Push Docker Image') {
-        sh "docker push moatazgamal7/iti-day2-python:v${env.BUILD_NUMBER}"
+    environment{
+        DOCKER_USER = credentials('dockerhub-user')
+        DOCKER_PASS = credentials('dockerhub-password')
     }
+    stages{
+        stage("build Docker image"){
+            steps{
+                script{
+                    def dockerx = new org.iti.docker()
+                    dockerx.build("python_build", "${BUILD_NUMBER}")
+                   
+                }
+            }
+ 
+               
+            
+        }
+        stage("Push Docker image"){
+            steps{
+                script{
+                    def dockerx = new org.iti.docker()
+                    dockerx.login("${DOCKER_USER}", "${DOCKER_PASS}")
+                    dockerx.push("python_build","${DOCKER_USER}", "${BUILD_NUMBER}")
+                }
+                
+            }
+        }
+    }
 }
