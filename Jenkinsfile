@@ -4,7 +4,7 @@
 pipeline{
     agent{
         label "any"
-        }
+    }
     environment{
         DOCKER_USER = credentials('dockerhub-user')
         DOCKER_PASS = credentials('dockerhub-password')
@@ -29,8 +29,8 @@ pipeline{
                     dockerx.login("${DOCKER_USER}", "${DOCKER_PASS}")
                     dockerx.push("python_build","${DOCKER_USER}", "${BUILD_NUMBER}")
                 }
-                
+
             }
-        }
-    }
+        }
+    }
 }
