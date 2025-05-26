@@ -1,9 +1,10 @@
 @Library('libx')_
+
+
 pipeline{
-    agent {
-        label 'any'
-    }
-    
+    agent{
+        label "any"
+        }
     environment{
         DOCKER_USER = credentials('dockerhub-user')
         DOCKER_PASS = credentials('dockerhub-password')
